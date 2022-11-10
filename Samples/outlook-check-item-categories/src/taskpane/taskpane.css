@@ -59,8 +59,9 @@
     margin-bottom: 15px;
     padding-top: 5px;
     padding-bottom: 5px;
-    padding-left: 14px;
-    padding-right: 14px;
+    padding-left: 10px;
+    padding-right: 10px;
+    width: 50px;
  }
 
  .ms-Button:hover .ms-Button-label {
