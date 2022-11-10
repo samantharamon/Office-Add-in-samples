@@ -52,6 +52,14 @@
      text-align: center;
  }
  
+ .ms-Button {
+    background-color: #005D95;
+ }
+
+ .ms-Button-label {
+    color: #FFFFFF;
+ }
+
  /* .ms-welcome__action.ms-Button--hero {
      margin-top: 15px;
      margin-bottom: 15px;
