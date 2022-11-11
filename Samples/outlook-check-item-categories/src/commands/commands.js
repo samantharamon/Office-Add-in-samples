@@ -311,7 +311,7 @@ function checkAppliedCategories(event, detectedWords) {
         let message = `Don't forget to also add the following categories: ${missingCategories.join(", ")}`;
         console.log(message);
         sendEvent.completed({ allowEvent: false, errorMessage: message });
-        // return;
+        return;
       }
 
       sendEvent.completed({ allowEvent: true });
@@ -321,7 +321,7 @@ function checkAppliedCategories(event, detectedWords) {
       } can be sent: ${requiredCategories.join(", ")}`;
       console.log(message);
       sendEvent.completed({ allowEvent: false, errorMessage: message });
-      // return;
+      return;
     }
   });
 }
