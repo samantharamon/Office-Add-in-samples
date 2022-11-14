@@ -3,75 +3,80 @@
  * See LICENSE in the project root for license information.
  */
 
- html,
- body {
-     width: 100%;
-     height: 100%;
-     margin: 0;
-     padding: 0;
- }
- 
- ul {
-     margin: 0;
-     padding: 0;
-     list-style-type: none;
- }
+html,
+body {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
 
- p {
-    margin: 0;
-    padding: 0;
- }
+ul {
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+}
 
- h3 {
-     margin-bottom: 0;
- }
- 
- .ms-welcome__header {
-    padding: 20px;
-    display: -webkit-flex;
-    display: flex;
-    -webkit-flex-direction: column;
-    flex-direction: column;
-    align-items: center;
- }
+p {
+  margin: 0;
+  padding: 0;
+}
 
- .ms-welcome__main {
-    display: -webkit-flex;
-    display: flex;
-    -webkit-flex-direction: column;
-    flex-direction: column;
-    -webkit-flex-wrap: nowrap;
-    flex-wrap: nowrap;
-    -webkit-flex: 1 0 0;
-    flex: 1 0 0;
-    padding: 10px 20px;
- }
+h3 {
+  margin-bottom: 0;
+}
 
- .ms-welcome__main > h2 {
-     width: 100%;
-     text-align: center;
- }
- 
- .ms-Button {
-    background-color: #005D95;
-    border-style: none;
-    margin-top: 15px;
-    margin-bottom: 15px;
-    padding-top: 5px;
-    padding-bottom: 5px;
-    padding-left: 10px;
-    padding-right: 10px;
-    width: 200px;
- }
+.ms-welcome__header {
+  padding: 20px;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-flex-direction: column;
+  flex-direction: column;
+  align-items: center;
+}
 
- .ms-Button:hover .ms-Button-label {
-    cursor: pointer;
- }
+.ms-welcome__main {
+  display: -webkit-flex;
+  display: flex;
+  -webkit-flex-direction: column;
+  flex-direction: column;
+  -webkit-flex-wrap: nowrap;
+  flex-wrap: nowrap;
+  -webkit-flex: 1 0 0;
+  flex: 1 0 0;
+  padding: 10px 20px;
+}
 
- .ms-Button-label {
-    color: #FFFFFF;
- }
+.ms-welcome__main > h2 {
+  width: 100%;
+  text-align: center;
+}
+
+select:-internal-list-box option:checked {
+  background-color: -internal-light-dark(#494848, #c3c3c3) !important;
+  color: -internal-light-dark(#ffffff, #101010) !important;
+}
+
+.ms-Button {
+  background-color: #005d95;
+  border-style: none;
+  margin-top: 15px;
+  margin-bottom: 15px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  padding-left: 10px;
+  padding-right: 10px;
+  width: 200px;
+}
+
+.ms-Button:hover .ms-Button-label {
+  cursor: pointer;
+}
+
+.ms-Button-label {
+  color: #ffffff;
+}
 
 b {
-    font-weight: bold;
+  font-weight: bold;
 }
