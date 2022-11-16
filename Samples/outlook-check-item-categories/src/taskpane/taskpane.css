@@ -52,10 +52,15 @@ h3 {
   text-align: center;
 }
 
-select:-internal-list-box option:checked {
+/* select:-internal-list-box option:checked {
   background: -internal-light-dark(#494848, #ffffff) !important;
   background-color: -internal-light-dark(#494848, #ffffff) !important;
   color: -internal-light-dark(#ffffff, #101010) !important;
+} */
+
+select option:checked {
+   background: #494848;
+   color: #ffffff;
 }
 
 .ms-Button {
