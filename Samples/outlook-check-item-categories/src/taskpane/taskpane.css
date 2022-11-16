@@ -53,7 +53,8 @@ h3 {
 }
 
 select:-internal-list-box option:checked {
-  background-color: -internal-light-dark(#494848, #c3c3c3) !important;
+  background: -internal-light-dark(#494848, #ffffff) !important;
+  background-color: -internal-light-dark(#494848, #ffffff) !important;
   color: -internal-light-dark(#ffffff, #101010) !important;
 }
 
