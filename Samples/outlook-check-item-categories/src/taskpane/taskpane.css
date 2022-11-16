@@ -60,6 +60,7 @@ h3 {
 
 select option:checked {
    background: #494848;
+   background-color: #494848;
    color: #ffffff;
 }
 
