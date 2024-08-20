@@ -3,7 +3,7 @@
  * Licensed under the MIT license.
 */
 
-var fileName;
+let fileName;
 const secretKey = "secret key 123";
 const encryptedAttachmentPrefix = "encrypted_";
 const decryptedAttachmentPrefix = "decrypted_";
@@ -291,39 +291,39 @@ function onAppointmentAttendeesChangedHandler(event) {
  * Runs when an attachment is added or removed from the compose email or appointment.
  * @param {Office.AsyncResult} event default: Office.AsyncResult
  */
-// function onItemAttachmentsChangedHandler(event) {  
-//   if (Office.context.platform  !== Office.PlatformType.OfficeOnline){
-//     console.warn(`onItemAttachmentsChangedHandler(): Unsupported platform for encrypting/decrypting attachments (${Office.context.platform}); leaving...`);
-//     event.completed();
-//     return;
-//   }
+function onItemAttachmentsChangedHandler(event) {
+  if (Office.context.platform  !== Office.PlatformType.OfficeOnline){
+    console.warn(`onItemAttachmentsChangedHandler(): Unsupported platform for encrypting/decrypting attachments (${Office.context.platform}); leaving...`);
+    event.completed();
+    return;
+  }
 
-//   if (event.attachmentStatus === "removed"){
-//     console.log("onItemAttachmentsChangedHandler(): Not processing removed attachments; leaving...");
-//     event.completed();
-//     return;
-//   }
+  if (event.attachmentStatus === "removed"){
+    console.log("onItemAttachmentsChangedHandler(): Not processing removed attachments; leaving...");
+    event.completed();
+    return;
+  }
 
-//   console.log(`onItemAttachmentsChangedHandler(): ${event.attachmentDetails.name} (${event.attachmentStatus})`);
+  console.log(`onItemAttachmentsChangedHandler(): ${event.attachmentDetails.name} (${event.attachmentStatus})`);
   
-//     if (event.attachmentDetails.name == `${decryptedAttachmentPrefix}${fileName}`) {
-//     // Don't process any more events - we've already attached the encrypted and decrypted versions of the attachment.
-//     event.completed();
-//     return;
-//   }
+    if (event.attachmentDetails.name == `${decryptedAttachmentPrefix}${fileName}`) {
+    // Don't process any more events - we've already attached the encrypted and decrypted versions of the attachment.
+    event.completed();
+    return;
+  }
 
-//   if (fileName !== undefined){
-//     console.log("onItemAttachmentsChangedHandler(): Skipping processing of further attachments - demo is done!");
-//     event.completed();
-//     return;
-//   }
+  if (fileName !== undefined){
+    console.log("onItemAttachmentsChangedHandler(): Skipping processing of further attachments - demo is done!");
+    event.completed();
+    return;
+  }
 
-//   // Process the first attachment.
-//   fileName = event.attachmentDetails.name;
-//   const item = Office.context.mailbox.item;
-//   const options = { asyncContext: { currentItem: item, callingEvent: event } };
-//   item.getAttachmentsAsync(options, getAttachmentsCallback);
-// }
+  // Process the first attachment.
+  fileName = event.attachmentDetails.name;
+  const item = Office.context.mailbox.item;
+  const options = { asyncContext: { currentItem: item, callingEvent: event } };
+  item.getAttachmentsAsync(options, getAttachmentsCallback);
+}
 
 // /**
 //  * Processes the attachments in the current item.
@@ -475,44 +475,44 @@ function onAppointmentAttendeesChangedHandler(event) {
 
 // ========================================================================================================
 
-function onItemAttachmentsChangedHandler(event) {  
-  if (Office.context.platform  !== Office.PlatformType.OfficeOnline){
-    console.warn(`onItemAttachmentsChangedHandler(): Unsupported platform for encrypting/decrypting attachments (${Office.context.platform}); leaving...`);
-    event.completed();
-    return;
-  }
+// function onItemAttachmentsChangedHandler(event) {  
+//   if (Office.context.platform  !== Office.PlatformType.OfficeOnline){
+//     console.warn(`onItemAttachmentsChangedHandler(): Unsupported platform for encrypting/decrypting attachments (${Office.context.platform}); leaving...`);
+//     event.completed();
+//     return;
+//   }
 
-  if (event.attachmentStatus === "removed"){
-    console.log("onItemAttachmentsChangedHandler(): Not processing removed attachments; leaving...");
-    event.completed(); //NOTE: Must call!
-    return;
-  }
+//   if (event.attachmentStatus === "removed"){
+//     console.log("onItemAttachmentsChangedHandler(): Not processing removed attachments; leaving...");
+//     event.completed(); //NOTE: Must call!
+//     return;
+//   }
 
-  console.log(`onItemAttachmentsChangedHandler(): ${event.attachmentDetails.name} (${event.attachmentStatus})`);
+//   console.log(`onItemAttachmentsChangedHandler(): ${event.attachmentDetails.name} (${event.attachmentStatus})`);
   
-    if (event.attachmentDetails.name == `${decryptedAttachmentPrefix}${fileName}`) {
-    //Don't process any more events - we've already encrypted the attachment and added it as another attachment, then decrypted that attachment and added it as well
-    event.completed(); //NOTE: Must call!
-    return;
-  }
-  if (fileName !== undefined){
-    console.log("onItemAttachmentsChangedHandler(): Skipping processing of further attachments - demo is done!");
-    event.completed(); //NOTE: Must call!
-    return;
-  }
+//     if (event.attachmentDetails.name == `${decryptedAttachmentPrefix}${fileName}`) {
+//     //Don't process any more events - we've already encrypted the attachment and added it as another attachment, then decrypted that attachment and added it as well
+//     event.completed(); //NOTE: Must call!
+//     return;
+//   }
+//   if (fileName !== undefined){
+//     console.log("onItemAttachmentsChangedHandler(): Skipping processing of further attachments - demo is done!");
+//     event.completed(); //NOTE: Must call!
+//     return;
+//   }
 
-  //Process the first attachment. We'll encrypt it and add it as another attachment, then decrypt that attachment and add it as well
-  fileName = event.attachmentDetails.name;
-  var item = Office.context.mailbox.item;
-  var options = { asyncContext: { currentItem: item, callingEvent: event } };    
-  item.getAttachmentsAsync(options, getAttachmentsCallback);
-}
+//   //Process the first attachment. We'll encrypt it and add it as another attachment, then decrypt that attachment and add it as well
+//   fileName = event.attachmentDetails.name;
+//   var item = Office.context.mailbox.item;
+//   var options = { asyncContext: { currentItem: item, callingEvent: event } };    
+//   item.getAttachmentsAsync(options, getAttachmentsCallback);
+// }
 /**
  * Processes the attachments in the current item. NOTE: Only the first attachment that's added will be processed
  * @param {Office.AsyncResult} result default: Office.AsyncResult
  */
 function getAttachmentsCallback(result) { 
-  var options = { asyncContext: { callingEvent: result.asyncContext.callingEvent } };    
+  var options = { asyncContext: { callingEvent: result.asyncContext.callingEvent } };
   //Only handle the first attachment (0 index in the array) - ignore the others
   result.asyncContext.currentItem.getAttachmentContentAsync(result.value[0].id, options, handleAttachmentsCallback);
 }
