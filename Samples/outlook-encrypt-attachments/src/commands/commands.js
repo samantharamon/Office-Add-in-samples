@@ -325,16 +325,16 @@ function onItemAttachmentsChangedHandler(event) {
   item.getAttachmentsAsync(options, getAttachmentsCallback);
 }
 
-// /**
-//  * Processes the attachments in the current item.
-//  * NOTE: Only the first attachment that's added will be processed.
-//  * @param {Office.AsyncResult} result default: Office.AsyncResult
-//  */
-// function getAttachmentsCallback(result) { 
-//   const options = { asyncContext: { callingEvent: result.asyncContext.callingEvent } };
-//   // Only handle the first attachment (0 index in the array) - ignore the others.
-//   result.asyncContext.currentItem.getAttachmentContentAsync(result.value[0].id, options, handleAttachmentsCallback);
-// }
+/**
+ * Processes the attachments in the current item.
+ * NOTE: Only the first attachment that's added will be processed.
+ * @param {Office.AsyncResult} result default: Office.AsyncResult
+ */
+function getAttachmentsCallback(result) { 
+  const options = { asyncContext: { callingEvent: result.asyncContext.callingEvent } };
+  // Only handle the first attachment (0 index in the array) - ignore the others.
+  result.asyncContext.currentItem.getAttachmentContentAsync(result.value[0].id, options, handleAttachmentsCallback);
+}
 
 // /**
 //  * Encrypts Base64 file data using CryptoJS and attaches the file to the email. Cloud, .eml and .icalendar attachments will not be processed.
@@ -507,15 +507,15 @@ function onItemAttachmentsChangedHandler(event) {
 //   var options = { asyncContext: { currentItem: item, callingEvent: event } };    
 //   item.getAttachmentsAsync(options, getAttachmentsCallback);
 // }
-/**
- * Processes the attachments in the current item. NOTE: Only the first attachment that's added will be processed
- * @param {Office.AsyncResult} result default: Office.AsyncResult
- */
-function getAttachmentsCallback(result) { 
-  var options = { asyncContext: { callingEvent: result.asyncContext.callingEvent } };
-  //Only handle the first attachment (0 index in the array) - ignore the others
-  result.asyncContext.currentItem.getAttachmentContentAsync(result.value[0].id, options, handleAttachmentsCallback);
-}
+// /**
+//  * Processes the attachments in the current item. NOTE: Only the first attachment that's added will be processed
+//  * @param {Office.AsyncResult} result default: Office.AsyncResult
+//  */
+// function getAttachmentsCallback(result) { 
+//   var options = { asyncContext: { callingEvent: result.asyncContext.callingEvent } };
+//   //Only handle the first attachment (0 index in the array) - ignore the others
+//   result.asyncContext.currentItem.getAttachmentContentAsync(result.value[0].id, options, handleAttachmentsCallback);
+// }
 /**
  * Method that encrypts base64 file data using CryptoJS and attaches the file to the email. Cloud, .eml and .ICalendar attachments will not be processed.
  * @param {Office.AsyncResult} result default: Office.AsyncResult
