@@ -3,7 +3,7 @@
  * Licensed under the MIT license.
 */
 
-let fileName;
+var fileName;
 const secretKey = "secret key 123";
 const encryptedAttachmentPrefix = "encrypted_";
 const decryptedAttachmentPrefix = "decrypted_";
@@ -15,12 +15,10 @@ const decryptedAttachmentPrefix = "decrypted_";
 Office.onReady();
 
 /**
- * Method that fires when a appointment is being created or edited
+ * Run when an appointment is created or edited.
  * @param {Office.AsyncResult} event default: Office.AsyncResult
  */
 function onAppointmentComposeHandler(event) {
-  //NOTE: Must call event.completed() when any logic below is finished!
-
   console.log("onAppointmentComposeHandler(): entered!");
 
   let originalAppointmentDate = {}; //Create an object to cache the original date/time and persist it to localStorage
@@ -87,7 +85,7 @@ function onAppointmentComposeHandler(event) {
   });
 }
 /**
- * Method that fires when an email is being created 
+ * Runs when an email is created.
  * @param {Office.AsyncResult} result default: Office.AsyncResult
  */
 function onMessageComposeHandler(event) {
@@ -118,6 +116,7 @@ function onMessageComposeHandler(event) {
     }
   );
 }
+
 /**
  * Runs when an attendee is added or removed from an appointment.
  * @param {Office.AsyncResult} event default: Office.AsyncResult
@@ -350,10 +349,14 @@ function handleAttachmentsCallback(result) {
     case Office.MailboxEnums.AttachmentContentFormat.Base64:
       // Set a notification message that we're processing the attachment. Note that this will be removed immediately after the decrypted attachment is added, and it may not be displayed for very long.
       const options = { 'asyncContext': { base64: result.value.content, callingEvent: result.asyncContext.callingEvent } };
-      Office.context.mailbox.item.notificationMessages.addAsync("processingAttachments", {
-        type: Office.MailboxEnums.ItemNotificationMessageType.ProgressIndicator,
-        message: `Please wait while the '${fileName}' attachment is encrypted...`,
-      }, options, (asyncResult) =>{
+      Office.context.mailbox.item.notificationMessages.addAsync(
+        "processingAttachments",
+        {
+          type: Office.MailboxEnums.ItemNotificationMessageType.ProgressIndicator,
+          message: `Please wait while the '${fileName}' attachment is encrypted...`,
+        },
+        options,
+        (asyncResult) => {
           // Encrypt Base64 file data using CryptoJS.
           if (asyncResult.status === Office.AsyncResultStatus.Succeeded) {
             try {
@@ -469,6 +472,180 @@ function decryptAttachment(result) {
     }
   );
 }
+
+// ========================================================================================================
+
+// function onItemAttachmentsChangedHandler(event) {  
+//   if (Office.context.platform  !== Office.PlatformType.OfficeOnline){
+//     console.warn(`onItemAttachmentsChangedHandler(): Unsupported platform for encrypting/decrypting attachments (${Office.context.platform}); leaving...`);
+//     event.completed();
+//     return;
+//   }
+
+//   if (event.attachmentStatus === "removed"){
+//     console.log("onItemAttachmentsChangedHandler(): Not processing removed attachments; leaving...");
+//     event.completed(); //NOTE: Must call!
+//     return;
+//   }
+
+//   console.log(`onItemAttachmentsChangedHandler(): ${event.attachmentDetails.name} (${event.attachmentStatus})`);
+  
+//     if (event.attachmentDetails.name == `${decryptedAttachmentPrefix}${fileName}`) {
+//     //Don't process any more events - we've already encrypted the attachment and added it as another attachment, then decrypted that attachment and added it as well
+//     event.completed(); //NOTE: Must call!
+//     return;
+//   }
+//   if (fileName !== undefined){
+//     console.log("onItemAttachmentsChangedHandler(): Skipping processing of further attachments - demo is done!");
+//     event.completed(); //NOTE: Must call!
+//     return;
+//   }
+
+//   //Process the first attachment. We'll encrypt it and add it as another attachment, then decrypt that attachment and add it as well
+//   fileName = event.attachmentDetails.name;
+//   var item = Office.context.mailbox.item;
+//   var options = { asyncContext: { currentItem: item, callingEvent: event } };    
+//   item.getAttachmentsAsync(options, getAttachmentsCallback);
+// }
+// /**
+//  * Processes the attachments in the current item. NOTE: Only the first attachment that's added will be processed
+//  * @param {Office.AsyncResult} result default: Office.AsyncResult
+//  */
+// function getAttachmentsCallback(result) { 
+//   var options = { asyncContext: { callingEvent: result.asyncContext.callingEvent } };    
+//   //Only handle the first attachment (0 index in the array) - ignore the others
+//   result.asyncContext.currentItem.getAttachmentContentAsync(result.value[0].id, options, handleAttachmentsCallback);
+// }
+// /**
+//  * Method that encrypts base64 file data using CryptoJS and attaches the file to the email. Cloud, .eml and .ICalendar attachments will not be processed.
+//  * @param {Office.AsyncResult} result default: Office.AsyncResult
+//  */
+// function handleAttachmentsCallback(result) {
+
+//   console.log(`handleAttachmentsCallback(): result.value.format = ${result.value.format}`);
+//   // console.dir(result.value.content); //NOTE: If you want to see the base64 data output to the console, uncomment this line - but console.dir() functions cannot be used when runtime logging is enabled!!
+
+//   // Parse string to be a url, an .eml file, a base64-encoded string, or an .icalendar file.
+//   switch (result.value.format) {
+//     case Office.MailboxEnums.AttachmentContentFormat.Base64:
+//       //Handle file attachment      
+//       //Set a notification message that we're processing the attachment. Note that this will be removed immediately after the decrypted attachment is added, and it may not be displayed for very long
+//       var options = { 'asyncContext': { base64: result.value.content, callingEvent: result.asyncContext.callingEvent } };
+//       Office.context.mailbox.item.notificationMessages.addAsync("processingAttachments", {
+//         type: Office.MailboxEnums.ItemNotificationMessageType.ProgressIndicator,
+//         message: `Please wait while the '${fileName}' attachment is encrypted...`,
+//       }, options, function(asyncResult){
+//           //Encrypt base64 file data using CryptoJS
+//           if (asyncResult.status === Office.AsyncResultStatus.Succeeded) {
+//             try {
+//               var ciphertext = CryptoJS.AES.encrypt(asyncResult.asyncContext.base64, secretKey).toString();
+//               //Then attaches the file to the email
+//               console.log(`handleAttachmentsCallback(): starting processing of file '${fileName}'...`);
+//               encryptAttachment(ciphertext, asyncResult.asyncContext.callingEvent);
+//             } catch (ex) {
+//               console.error(`handleAttachmentsCallback(): Error: ${ex}`);
+//               options = { 'asyncContext': { callingEvent: asyncResult.asyncContext.callingEvent } };
+//               Office.context.mailbox.item.notificationMessages.removeAsync("processingAttachments", options, function (asyncResult2) {
+//                 console.log("handleAttachmentsCallback(): Notification message removed.");
+//                 asyncResult2.asyncContext.callingEvent.completed();
+//               });              
+//             }
+//           } else {
+//             console.error(`handleAttachmentsCallback(): Unexpected - status is ${asyncResult.status}`);
+//             asyncResult.asyncContext.callingEvent.completed();
+//           }     
+//       });      
+//       break;
+//     case Office.MailboxEnums.AttachmentContentFormat.Eml:
+//       // Handle email item attachment.
+//       console.log("handleAttachmentsCallback(): Attachment is a message.");
+//       result.asyncContext.callingEvent.completed();
+//       break;
+//     case Office.MailboxEnums.AttachmentContentFormat.ICalendar:
+//       // Handle .icalender attachment.
+//       console.log("handleAttachmentsCallback(): Attachment is a calendar item.");
+//       result.asyncContext.callingEvent.completed();
+//       break;
+//     case Office.MailboxEnums.AttachmentContentFormat.Url:
+//       // Handle cloud attachment.
+//       console.log("handleAttachmentsCallback(): Attachment is a cloud attachment.");
+//       result.asyncContext.callingEvent.completed();
+//       break;
+//     default:
+//       // Handle attachment formats that are not supported.
+//       console.console.warn();("handleAttachmentsCallback(): Not handling unsupported attachment.");
+//       result.asyncContext.callingEvent.completed();
+//       break;
+//   }
+// }
+// /**
+//  * Method that converts encrypted data to base64 and creates and adds a file attachment to the current email
+//  * @param {string} encryptedData default: "undefined"
+//  * @param {Office.AsyncResult} callingEvent default: Office.AsyncResult. The event parameter from the action event
+//  */
+// function encryptAttachment(encryptedData, callingEvent) {
+//   console.log(`encryptAttachment(): Encrypting file '${fileName}'...`);
+//   // console.dir(encryptedData); //NOTE: If you want to see the encrypted data output to the console, uncomment this line
+
+//   var base64EncryptedData = window.btoa(encryptedData);
+//   var encryptedFileName = `${encryptedAttachmentPrefix}${fileName}`;
+//   var options = { 'asyncContext': { encryptedFileName: encryptedFileName, callingEvent: callingEvent}, 'isInline': false };
+
+//   //NOTE: If you want to see the base64 data output to the console, uncomment these lines
+//   // console.log("encryptAttachment(): base64 encrypted data:");
+//   // console.dir(base64EncryptedData);
+
+//   console.log(`encryptAttachment(): Adding encrypted file '${encryptedFileName}'...`);
+//   Office.context.mailbox.item.addFileAttachmentFromBase64Async(
+//     base64EncryptedData,
+//     encryptedFileName,
+//     options,
+//     function (asyncResult) {
+//       options = { 'asyncContext': { encryptedFileName: asyncResult.asyncContext.encryptedFileName, callingEvent: asyncResult.asyncContext.callingEvent, encryptedData: encryptedData} };
+//       console.log(`encryptAttachment(): Added encrypted attachment '${asyncResult.asyncContext.encryptedFileName}'; now decrypting...`);
+//       //console.dir(asyncResult); //NOTE: If you want to see the base64 data output to the console, uncomment this line
+//       decryptAttachment(options);
+//     }
+//   );
+// }
+// /**
+//  * Method that decrypts encrypted base64 file data using CryptoJS and attaches the file to the email
+//  * @param {Office.AsyncResult} result default: Office.AsyncResult. Object containing encryptedFileName, encryptedData and callingEvent properties in asyncContext property
+//  */
+// function decryptAttachment(result) {
+//   console.log(`decryptAttachment(): Decrypting file '${result.asyncContext.encryptedFileName}'...`);
+//   var bytes = CryptoJS.AES.decrypt(result.asyncContext.encryptedData, secretKey);
+//   var originalText = bytes.toString(CryptoJS.enc.Utf8);
+//   var decryptedFileName = `${decryptedAttachmentPrefix}${fileName}`;
+
+//   // console.log(`decryptAttachment(): Original base64: ${originalText}`); //NOTE: If you want to see the base64 data output to the console, uncomment this line
+//   console.log(`decryptAttachment(): Adding decrypted file '${decryptedFileName}'...`);
+
+//   var options = { 'asyncContext': { callingEvent: result.asyncContext.callingEvent} };
+//   Office.context.mailbox.item.addFileAttachmentFromBase64Async(
+//     originalText,
+//     decryptedFileName,
+//     options,
+//     function (asyncResult) {
+//       console.log(`decryptAttachment(): Added decrypted attachment '${decryptedFileName}'`);
+//       // console.dir(asyncResult); //NOTE: If you want to see the base64 data output to the console, uncomment this line
+//       Office.context.mailbox.item.notificationMessages.removeAsync("processingAttachments", options, function (asyncResult2) {
+//         console.log("decryptAttachment(): Notification message removed.");        
+//         Office.context.mailbox.item.notificationMessages.addAsync("attachmentsAdded", {
+//           type: Office.MailboxEnums.ItemNotificationMessageType.InformationalMessage,
+//           message: `The '${fileName}' attachment has been encrypted and decrypted and added as reference attachments for your review.`,
+//           icon: "Icon.16x16",
+//           persistent: false,
+//         }, options, function(asyncResult3){
+//           console.log("decryptAttachment(): All attachment processing operations completed!");        
+//           asyncResult3.asyncContext.callingEvent.completed();
+//         });
+//       });
+//     }
+//   );
+// }
+
+// ========================================================================================================
 
 /**
  * Runs when the user changes the date/time of an appointment.
