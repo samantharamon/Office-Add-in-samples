@@ -401,36 +401,36 @@ function handleAttachmentsCallback(result) {
   }
 }
 
-// /**
-//  * Converts encrypted data to Base64. Then, creates and adds a file attachment to the current mail item.
-//  * @param {string} encryptedData default: "undefined"
-//  * @param {Office.AsyncResult} callingEvent default: Office.AsyncResult. The event parameter from the action event.
-//  */
-// function encryptAttachment(encryptedData, callingEvent) {
-//   console.log(`encryptAttachment(): Encrypting file '${fileName}'...`);
-//   // console.dir(encryptedData); //NOTE: If you want to see the encrypted data output to the console, uncomment this line.
+/**
+ * Converts encrypted data to Base64. Then, creates and adds a file attachment to the current mail item.
+ * @param {string} encryptedData default: "undefined"
+ * @param {Office.AsyncResult} callingEvent default: Office.AsyncResult. The event parameter from the action event.
+ */
+function encryptAttachment(encryptedData, callingEvent) {
+  console.log(`encryptAttachment(): Encrypting file '${fileName}'...`);
+  // console.dir(encryptedData); //NOTE: If you want to see the encrypted data output to the console, uncomment this line.
 
-//   const base64EncryptedData = window.btoa(encryptedData);
-//   const encryptedFileName = `${encryptedAttachmentPrefix}${fileName}`;
-//   const options = { 'asyncContext': { encryptedFileName: encryptedFileName, callingEvent: callingEvent}, 'isInline': false };
+  const base64EncryptedData = window.btoa(encryptedData);
+  const encryptedFileName = `${encryptedAttachmentPrefix}${fileName}`;
+  const options = { 'asyncContext': { encryptedFileName: encryptedFileName, callingEvent: callingEvent}, 'isInline': false };
 
-//   // NOTE: If you want to see the Base64 data output to the console, uncomment the following lines.
-//   // console.log("encryptAttachment(): base64 encrypted data:");
-//   // console.dir(base64EncryptedData);
+  // NOTE: If you want to see the Base64 data output to the console, uncomment the following lines.
+  // console.log("encryptAttachment(): base64 encrypted data:");
+  // console.dir(base64EncryptedData);
 
-//   console.log(`encryptAttachment(): Adding encrypted file '${encryptedFileName}'...`);
-//   Office.context.mailbox.item.addFileAttachmentFromBase64Async(
-//     base64EncryptedData,
-//     encryptedFileName,
-//     options,
-//     (asyncResult) => {
-//       options = { 'asyncContext': { encryptedFileName: asyncResult.asyncContext.encryptedFileName, callingEvent: asyncResult.asyncContext.callingEvent, encryptedData: encryptedData} };
-//       console.log(`encryptAttachment(): Added encrypted attachment '${asyncResult.asyncContext.encryptedFileName}'; now decrypting...`);
-//       //console.dir(asyncResult); // NOTE: If you want to see the base64 data output to the console, uncomment this line.
-//       decryptAttachment(options);
-//     }
-//   );
-// }
+  console.log(`encryptAttachment(): Adding encrypted file '${encryptedFileName}'...`);
+  Office.context.mailbox.item.addFileAttachmentFromBase64Async(
+    base64EncryptedData,
+    encryptedFileName,
+    options,
+    (asyncResult) => {
+      options = { 'asyncContext': { encryptedFileName: asyncResult.asyncContext.encryptedFileName, callingEvent: asyncResult.asyncContext.callingEvent, encryptedData: encryptedData} };
+      console.log(`encryptAttachment(): Added encrypted attachment '${asyncResult.asyncContext.encryptedFileName}'; now decrypting...`);
+      //console.dir(asyncResult); // NOTE: If you want to see the base64 data output to the console, uncomment this line.
+      decryptAttachment(options);
+    }
+  );
+}
 
 // /**
 //  * Decrypts encrypted Base64 file data using CryptoJS. Then, attaches the file to the mail item.
@@ -578,36 +578,36 @@ function handleAttachmentsCallback(result) {
 //       break;
 //   }
 // }
-/**
- * Method that converts encrypted data to base64 and creates and adds a file attachment to the current email
- * @param {string} encryptedData default: "undefined"
- * @param {Office.AsyncResult} callingEvent default: Office.AsyncResult. The event parameter from the action event
- */
-function encryptAttachment(encryptedData, callingEvent) {
-  console.log(`encryptAttachment(): Encrypting file '${fileName}'...`);
-  // console.dir(encryptedData); //NOTE: If you want to see the encrypted data output to the console, uncomment this line
+// /**
+//  * Method that converts encrypted data to base64 and creates and adds a file attachment to the current email
+//  * @param {string} encryptedData default: "undefined"
+//  * @param {Office.AsyncResult} callingEvent default: Office.AsyncResult. The event parameter from the action event
+//  */
+// function encryptAttachment(encryptedData, callingEvent) {
+//   console.log(`encryptAttachment(): Encrypting file '${fileName}'...`);
+//   // console.dir(encryptedData); //NOTE: If you want to see the encrypted data output to the console, uncomment this line
 
-  var base64EncryptedData = window.btoa(encryptedData);
-  var encryptedFileName = `${encryptedAttachmentPrefix}${fileName}`;
-  var options = { 'asyncContext': { encryptedFileName: encryptedFileName, callingEvent: callingEvent}, 'isInline': false };
+//   var base64EncryptedData = window.btoa(encryptedData);
+//   var encryptedFileName = `${encryptedAttachmentPrefix}${fileName}`;
+//   var options = { 'asyncContext': { encryptedFileName: encryptedFileName, callingEvent: callingEvent}, 'isInline': false };
 
-  //NOTE: If you want to see the base64 data output to the console, uncomment these lines
-  // console.log("encryptAttachment(): base64 encrypted data:");
-  // console.dir(base64EncryptedData);
+//   //NOTE: If you want to see the base64 data output to the console, uncomment these lines
+//   // console.log("encryptAttachment(): base64 encrypted data:");
+//   // console.dir(base64EncryptedData);
 
-  console.log(`encryptAttachment(): Adding encrypted file '${encryptedFileName}'...`);
-  Office.context.mailbox.item.addFileAttachmentFromBase64Async(
-    base64EncryptedData,
-    encryptedFileName,
-    options,
-    function (asyncResult) {
-      options = { 'asyncContext': { encryptedFileName: asyncResult.asyncContext.encryptedFileName, callingEvent: asyncResult.asyncContext.callingEvent, encryptedData: encryptedData} };
-      console.log(`encryptAttachment(): Added encrypted attachment '${asyncResult.asyncContext.encryptedFileName}'; now decrypting...`);
-      //console.dir(asyncResult); //NOTE: If you want to see the base64 data output to the console, uncomment this line
-      decryptAttachment(options);
-    }
-  );
-}
+//   console.log(`encryptAttachment(): Adding encrypted file '${encryptedFileName}'...`);
+//   Office.context.mailbox.item.addFileAttachmentFromBase64Async(
+//     base64EncryptedData,
+//     encryptedFileName,
+//     options,
+//     function (asyncResult) {
+//       options = { 'asyncContext': { encryptedFileName: asyncResult.asyncContext.encryptedFileName, callingEvent: asyncResult.asyncContext.callingEvent, encryptedData: encryptedData} };
+//       console.log(`encryptAttachment(): Added encrypted attachment '${asyncResult.asyncContext.encryptedFileName}'; now decrypting...`);
+//       //console.dir(asyncResult); //NOTE: If you want to see the base64 data output to the console, uncomment this line
+//       decryptAttachment(options);
+//     }
+//   );
+// }
 /**
  * Method that decrypts encrypted base64 file data using CryptoJS and attaches the file to the email
  * @param {Office.AsyncResult} result default: Office.AsyncResult. Object containing encryptedFileName, encryptedData and callingEvent properties in asyncContext property
