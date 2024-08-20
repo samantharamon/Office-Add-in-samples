@@ -424,7 +424,7 @@ function encryptAttachment(encryptedData, callingEvent) {
     encryptedFileName,
     options,
     (asyncResult) => {
-      options = { 'asyncContext': { encryptedFileName: asyncResult.asyncContext.encryptedFileName, callingEvent: asyncResult.asyncContext.callingEvent, encryptedData: encryptedData} };
+      const options = { 'asyncContext': { encryptedFileName: asyncResult.asyncContext.encryptedFileName, callingEvent: asyncResult.asyncContext.callingEvent, encryptedData: encryptedData} };
       console.log(`encryptAttachment(): Added encrypted attachment '${asyncResult.asyncContext.encryptedFileName}'; now decrypting...`);
       //console.dir(asyncResult); // NOTE: If you want to see the base64 data output to the console, uncomment this line.
       decryptAttachment(options);
@@ -442,7 +442,7 @@ function decryptAttachment(result) {
   const originalText = bytes.toString(CryptoJS.enc.Utf8);
   const decryptedFileName = `${decryptedAttachmentPrefix}${fileName}`;
 
-  // console.log(`decryptAttachment(): Original base64: ${originalText}`); //NOTE: If you want to see the base64 data output to the console, uncomment this line
+  // console.log(`decryptAttachment(): Original base64: ${originalText}`); //NOTE: If you want to see the base64 data output to the console, uncomment this line.
   console.log(`decryptAttachment(): Adding decrypted file '${decryptedFileName}'...`);
 
   const options = { 'asyncContext': { callingEvent: result.asyncContext.callingEvent} };
