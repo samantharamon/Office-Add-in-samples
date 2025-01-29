@@ -34,8 +34,8 @@ function on_initialization_complete() {
 }
 
 function prepopulate_from_userprofile() {
-  _display_name.val(Office.context.mailbox.userProfile.displayName);
-  _email_id.val(Office.context.mailbox.userProfile.emailAddress);
+  _display_name.value = Office.context.mailbox.userProfile.displayName;
+  _email_id.value = Office.context.mailbox.userProfile.emailAddress;
 }
 
 function load_saved_user_info() {
@@ -49,15 +49,15 @@ function load_saved_user_info() {
   if (user_info_str) {
     const user_info = JSON.parse(user_info_str);
 
-    _display_name.val(user_info.name);
-    _email_id.val(user_info.email);
-    _job_title.val(user_info.job);
-    _phone_number.val(user_info.phone);
-    _greeting_text.val(user_info.greeting);
+    _display_name.value = user_info.name;
+    _email_id.value = user_info.email;
+    _job_title.value = user_info.job;
+    _phone_number.value = user_info.phone;
+    _greeting_text.value = user_info.greeting;
 
     let pronoun = user_info.pronoun;
     if (pronoun && pronoun.length >= 3) {
-      _preferred_pronoun.val(pronoun.substring(1, pronoun.length - 1));
+      _preferred_pronoun.value = pronoun.substring(1, pronoun.length - 1);
     }
   } else {
     console.log("Unable to retrieve user info.");
@@ -100,8 +100,8 @@ function navigate_to_taskpane_assignsignature() {
 }
 
 function create_user_info() {
-  let name = _display_name.val().trim();
-  let email = _email_id.val().trim();
+  let name = _display_name.value.trim();
+  let email = _email_id.value.trim();
 
   clear_message();
 
@@ -112,10 +112,10 @@ function create_user_info() {
 
     user_info.name = name;
     user_info.email = email;
-    user_info.job = _job_title.val().trim();
-    user_info.phone = _phone_number.val().trim();
-    user_info.greeting = _greeting_text.val().trim();
-    user_info.pronoun = _preferred_pronoun.val().trim();
+    user_info.job = _job_title.value.trim();
+    user_info.phone = _phone_number.value.trim();
+    user_info.greeting = _greeting_text.value.trim();
+    user_info.pronoun = _preferred_pronoun.value.trim();
 
     if (user_info.pronoun !== "") {
       user_info.pronoun = "(" + user_info.pronoun + ")";
@@ -131,12 +131,12 @@ function create_user_info() {
 }
 
 function clear_all_fields() {
-  _display_name.val("");
-  _email_id.val("");
-  _job_title.val("");
-  _phone_number.val("");
-  _greeting_text.val("");
-  _preferred_pronoun.val("");
+  _display_name.value = "";
+  _email_id.value = "";
+  _job_title.value = "";
+  _phone_number.value = "";
+  _greeting_text.value = "";
+  _preferred_pronoun.value = "";
 }
 
 function clear_all_localstorage_data() {
