@@ -10,7 +10,7 @@
   <DisplayName DefaultValue="Office Add-ins signature sample"/>
   <Description DefaultValue="Insert your signature with ease."/>
   <IconUrl DefaultValue="https://localhost:3000/assets/final_logo.png"/>
-  <HighResolutionIconUrl DefaultValue="https://localhost:3000/assets/final_logo.jpg"/>
+  <HighResolutionIconUrl DefaultValue="https://localhost:3000/assets/final_logo.png"/>
   <SupportUrl DefaultValue="https://www.contoso.com/help"/>
   <AppDomains>
     <AppDomain>https://www.contoso.com</AppDomain>

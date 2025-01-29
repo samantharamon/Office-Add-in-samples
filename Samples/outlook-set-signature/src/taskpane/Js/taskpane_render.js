@@ -43,11 +43,12 @@ function prepopulate_from_userprofile()
 
 function load_saved_user_info()
 {
-  let user_info_str = localStorage.getItem('user_info');
-  if (!user_info_str)
-  {
-    user_info_str = Office.context.roamingSettings.get('user_info');
-  }
+  // let user_info_str = localStorage.getItem('user_info');
+  let user_info_str = Office.context.roamingSettings.get('user_info_form');
+  // if (!user_info_str)
+  // {
+  //   user_info_str = Office.context.roamingSettings.get('user_info');
+  // }
 
   if (user_info_str)
   {
@@ -64,6 +65,8 @@ function load_saved_user_info()
     {
       _preferred_pronoun.val(pronoun.substring(1, pronoun.length - 1));
     }
+  } else {
+    console.log("Unable to retrieve user info.");
   }
 }
 
@@ -136,7 +139,8 @@ function create_user_info()
     }
 
     console.log(user_info);
-    localStorage.setItem('user_info', JSON.stringify(user_info));
+    // localStorage.setItem('user_info', JSON.stringify(user_info));
+    Office.context.roamingSettings.set('user_info_form', JSON.stringify(user_info));
     navigate_to_taskpane_assignsignature();
   }
 }
@@ -188,6 +192,6 @@ function clear_roaming_settings()
 function reset_all_configuration()
 {
   clear_all_fields();
-  clear_all_localstorage_data();
+  // clear_all_localstorage_data();
   clear_roaming_settings();
 }
