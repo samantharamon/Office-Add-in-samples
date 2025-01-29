@@ -65,11 +65,11 @@ function load_saved_user_info() {
 }
 
 function display_message(msg) {
-  _message.text(msg);
+  _message.textContent = msg;
 }
 
 function clear_message() {
-  _message.text("");
+  _message.textContent = "";
 }
 
 function is_not_valid_text(text) {
