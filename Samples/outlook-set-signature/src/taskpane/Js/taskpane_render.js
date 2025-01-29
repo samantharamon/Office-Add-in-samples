@@ -20,14 +20,14 @@ Office.onReady(() => {
 });
 
 function on_initialization_complete() {
-  _output = document.querySelector("textarea#output");
-  _display_name = document.querySelector("input#display_name");
-  _email_id = document.querySelector("input#email_id");
-  _job_title = document.querySelector("input#job_title");
-  _phone_number = document.querySelector("input#phone_number");
-  _greeting_text = document.querySelector("input#greeting_text");
-  _preferred_pronoun = document.querySelector("input#preferred_pronoun");
-  _message = document.querySelector("p#message");
+  // _output = document.querySelector("textarea#output");
+  _display_name = document.querySelector("#display_name");
+  _email_id = document.querySelector("#email_id");
+  _job_title = document.querySelector("#job_title");
+  _phone_number = document.querySelector("#phone_number");
+  _greeting_text = document.querySelector("#greeting_text");
+  _preferred_pronoun = document.querySelector("#preferred_pronoun");
+  _message = document.querySelector("#message");
 
   prepopulate_from_userprofile();
   load_saved_user_info();
