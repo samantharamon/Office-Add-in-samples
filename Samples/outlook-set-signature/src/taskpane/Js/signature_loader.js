@@ -4,15 +4,19 @@
 let _user_info;
 
 Office.onReady(() => {
-  on_initialization_complete();
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', (event) => {
+      on_initialization_complete();
+    });
+  } else {
+    on_initialization_complete();
+  }
 })
 
 function on_initialization_complete() {
-  document.addEventListener('DOMContentLoaded', (event) => {
-    lazy_init_user_info();
-    populate_templates();
-    show_signature_settings();
-  });
+  lazy_init_user_info();
+  populate_templates();
+  show_signature_settings();
 }
 
 function lazy_init_user_info() {
