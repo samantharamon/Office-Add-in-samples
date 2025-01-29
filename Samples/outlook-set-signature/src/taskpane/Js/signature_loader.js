@@ -27,7 +27,7 @@ function lazy_init_user_info()
   {
     // let user_info_str = localStorage.getItem('user_info');
     let user_info_str = Office.context.roamingSettings.get('user_info_form');
-
+    console.log(user_info_str);
     if (user_info_str)
     {
       _user_info = JSON.parse(user_info_str);
