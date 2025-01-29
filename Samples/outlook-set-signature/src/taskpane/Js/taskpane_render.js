@@ -15,7 +15,7 @@ Office.onReady(() => {
 
 function on_initialization_complete()
 {
-  document.addEventListener('DOMContentLoaded', () => {
+  document.addEventListener('DOMContentLoaded', (event) => {
     _output = $("textarea#output");
     _display_name = $("input#display_name");
     _email_id = $("input#email_id");

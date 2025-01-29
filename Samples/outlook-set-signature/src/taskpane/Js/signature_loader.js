@@ -8,7 +8,7 @@ Office.onReady(() => {
 })
 
 function on_initialization_complete() {
-  document.addEventListener('DOMContentLoaded', () => {
+  document.addEventListener('DOMContentLoaded', (event) => {
     lazy_init_user_info();
     populate_templates();
     show_signature_settings();
