@@ -42,37 +42,37 @@ function populate_templates() {
 
 function populate_template_A() {
   let str = get_template_A_str(_user_info);
-  $("#box_1").html(str);
+  document.getElementById("box_1").innerHTML = str;
 }
 
 function populate_template_B() {
   let str = get_template_B_str(_user_info);
-  $("#box_2").html(str);
+  document.getElementById("box_2").innerHTML = str;
 }
 
 function populate_template_C() {
   let str = get_template_C_str(_user_info);
-  $("#box_3").html(str);
+  document.getElementById("box_3").innerHTML = str;
 }
 
 function show_signature_settings() {
   let val = Office.context.roamingSettings.get("newMail");
   if (val) {
-    $("#new_mail").val(val);
+    document.getElementById("new_mail").value = val;
   }
 
   val = Office.context.roamingSettings.get("reply");
   if (val) {
-    $("#reply").val(val);
+    document.getElementById("reply").value = val;
   }
 
   val = Office.context.roamingSettings.get("forward");
   if (val) {
-    $("#forward").val(val);
+    document.getElementById("forward").value = val;
   }
 
   val = Office.context.roamingSettings.get("override_olk_signature");
   if (val != null) {
-    $("#checkbox_sig").prop('checked', val);
+    document.getElementById("checkbox_sig").checked = val;
   }
 }
