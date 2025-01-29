@@ -18,6 +18,7 @@ function disable_client_signatures_if_necessary() {
 function save_signature_settings() {
 	//   let user_info_str = localStorage.getItem('user_info');
 	let user_info_str = Office.context.roamingSettings.get('user_info_form');
+	console.log(`Debug save_signature_settings: ${user_info_str}`);
 
 	if (user_info_str) {
 		if (!_user_info) {
@@ -37,7 +38,7 @@ function save_signature_settings() {
 		// $("#message").show("slow");
 	}
 	else {
-		// TBD display an error somewhere?
+		console.log("Signature was not saved.");
 	}
 }
 

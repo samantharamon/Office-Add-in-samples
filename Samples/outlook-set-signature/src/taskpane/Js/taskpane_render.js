@@ -41,6 +41,7 @@ function prepopulate_from_userprofile() {
 function load_saved_user_info() {
   // let user_info_str = localStorage.getItem('user_info');
   let user_info_str = Office.context.roamingSettings.get('user_info_form');
+  console.log(`Debug load_saved_user_info: ${user_info_str}`);
   // if (!user_info_str)
   // {
   //   user_info_str = Office.context.roamingSettings.get('user_info');
@@ -121,10 +122,8 @@ function create_user_info() {
       user_info.pronoun = "(" + user_info.pronoun + ")";
     }
 
-    console.log(user_info);
     // localStorage.setItem('user_info', JSON.stringify(user_info));
     Office.context.roamingSettings.set('user_info_form', JSON.stringify(user_info));
-    console.log(Office.context.roamingSettings.get('user_info_form'));
     Office.context.roamingSettings.saveAsync(result => { console.log(result); });
     navigate_to_taskpane_assignsignature();
   }

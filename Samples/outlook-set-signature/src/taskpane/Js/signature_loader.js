@@ -20,16 +20,14 @@ function on_initialization_complete() {
 }
 
 function lazy_init_user_info() {
-  if (!_user_info) {
-    // let user_info_str = localStorage.getItem('user_info');
-    let user_info_str = Office.context.roamingSettings.get('user_info_form');
-    console.log(user_info_str);
-    if (user_info_str) {
-      _user_info = JSON.parse(user_info_str);
-    }
-    else {
-      console.log("Unable to retrieve 'user_info' from localStorage.");
-    }
+  // let user_info_str = localStorage.getItem('user_info');
+  let user_info_str = Office.context.roamingSettings.get('user_info_form');
+  console.log(`Debug lazy_init_user_info: ${user_info_str}`);
+  if (user_info_str) {
+    _user_info = JSON.parse(user_info_str);
+  }
+  else {
+    console.log("Unable to retrieve user info.");
   }
 }
 
