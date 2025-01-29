@@ -9,30 +9,25 @@ let _greeting_text;
 let _preferred_pronoun;
 let _message;
 
-Office.initialize = function(reason)
-{
+Office.onReady(() => {
   on_initialization_complete();
-}
+});
 
 function on_initialization_complete()
 {
-	$(document).ready
-	(
-		function()
-		{
-      _output = $("textarea#output");
-      _display_name = $("input#display_name");
-      _email_id = $("input#email_id");
-      _job_title = $("input#job_title");
-      _phone_number = $("input#phone_number");
-      _greeting_text = $("input#greeting_text");
-      _preferred_pronoun = $("input#preferred_pronoun");
-      _message = $("p#message");
+  document.addEventListener('DOMContentLoaded', () => {
+    _output = $("textarea#output");
+    _display_name = $("input#display_name");
+    _email_id = $("input#email_id");
+    _job_title = $("input#job_title");
+    _phone_number = $("input#phone_number");
+    _greeting_text = $("input#greeting_text");
+    _preferred_pronoun = $("input#preferred_pronoun");
+    _message = $("p#message");
 
-      prepopulate_from_userprofile();
-      load_saved_user_info();
-		}
-	);
+    prepopulate_from_userprofile();
+    load_saved_user_info();
+  });
 }
 
 function prepopulate_from_userprofile()

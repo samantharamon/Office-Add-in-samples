@@ -3,7 +3,7 @@
 
 // This file contains code only used by autorunweb.html when loaded in Outlook on the web.
 
-Office.initialize = function (reason) {};
+Office.onReady();
 
 /**
  * For Outlook on the web, insert signature into appointment or message.
