@@ -125,6 +125,8 @@ function create_user_info() {
     // localStorage.setItem('user_info', JSON.stringify(user_info));
     Office.context.roamingSettings.set('user_info_form', JSON.stringify(user_info));
     Office.context.roamingSettings.saveAsync(result => { console.log(result); });
+    const testRoaming = Office.context.roamingSettings.get('user_info_form');
+    console.log(`Debug create_user_info: ${testRoaming}`);
     navigate_to_taskpane_assignsignature();
   }
 }
