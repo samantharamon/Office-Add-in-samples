@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <OfficeApp xmlns="http://schemas.microsoft.com/office/appforoffice/1.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:bt="http://schemas.microsoft.com/office/officeappbasictypes/1.0" xmlns:mailappor="http://schemas.microsoft.com/office/mailappversionoverrides/1.0" xsi:type="MailApp">
-  <Id>b536ce6c-bd17-4f71-a879-86f520b7cd85</Id>
+  <Id>b536ce6c-bd17-4f71-a879-86f520b7cd86</Id>
   <Version>1.0.0.0</Version>
   <ProviderName>Contoso</ProviderName>
   <DefaultLocale>en-US</DefaultLocale>
-  <DisplayName DefaultValue="Mobile event-based"/>
+  <DisplayName DefaultValue="Mobile event-based (GH)"/>
   <Description DefaultValue="A template to get started."/>
-  <IconUrl DefaultValue="https://localhost:3000/assets/icon-64.png"/>
-  <HighResolutionIconUrl DefaultValue="https://localhost:3000/assets/icon-128.png"/>
+  <IconUrl DefaultValue="https://samantharamon.github.io/Office-Add-in-samples/Samples/outlook-mobile-add-in//assets/icon-64.png"/>
+  <HighResolutionIconUrl DefaultValue="https://samantharamon.github.io/Office-Add-in-samples/Samples/outlook-mobile-add-in/assets/icon-128.png"/>
   <SupportUrl DefaultValue="https://www.contoso.com/help"/>
   <AppDomains>
     <AppDomain>https://www.contoso.com</AppDomain>
@@ -23,7 +23,7 @@
   <FormSettings>
     <Form xsi:type="ItemRead">
       <DesktopSettings>
-        <SourceLocation DefaultValue="https://localhost:3000/taskpane.html"/>
+        <SourceLocation DefaultValue="https://samantharamon.github.io/Office-Add-in-samples/Samples/outlook-mobile-add-in/src/taskpane/taskpane.html"/>
         <RequestedHeight>250</RequestedHeight>
       </DesktopSettings>
     </Form>
@@ -106,14 +106,14 @@
              Replace these instances with the information of the web server that hosts your add-in's files. -->
         <Resources>
             <bt:Images>
-                <bt:Image id="Icon.16x16" DefaultValue="https://contoso.com/assets/icon-16.png"/>
-                <bt:Image id="Icon.32x32" DefaultValue="https://contoso.com/assets/icon-32.png"/>
-                <bt:Image id="Icon.80x80" DefaultValue="https://contoso.com/assets/icon-80.png"/>
+                <bt:Image id="Icon.16x16" DefaultValue="https://samantharamon.github.io/Office-Add-in-samples/Samples/outlook-mobile-add-in/assets/icon-16.png"/>
+                <bt:Image id="Icon.32x32" DefaultValue="https://samantharamon.github.io/Office-Add-in-samples/Samples/outlook-mobile-add-in/assets/icon-32.png"/>
+                <bt:Image id="Icon.80x80" DefaultValue="https://samantharamon.github.io/Office-Add-in-samples/Samples/outlook-mobile-add-in/assets/icon-80.png"/>
             </bt:Images>
             <bt:Urls>
-                <bt:Url id="Commands.Url" DefaultValue="https://contoso.com/commands.html"/>
-                <bt:Url id="Taskpane.Url" DefaultValue="https://contoso.com/taskpane.html"/>
-                <bt:Url id="WebViewRuntime.Url" DefaultValue="https://contoso.com/commands.html"/>
+                <bt:Url id="Commands.Url" DefaultValue="https://samantharamon.github.io/Office-Add-in-samples/Samples/outlook-mobile-add-in/src/commands/commands.html"/>
+                <bt:Url id="Taskpane.Url" DefaultValue="https://samantharamon.github.io/Office-Add-in-samples/Samples/outlook-mobile-add-in/src/taskpane/taskpane.html"/>
+                <bt:Url id="WebViewRuntime.Url" DefaultValue="https://samantharamon.github.io/Office-Add-in-samples/Samples/outlook-mobile-add-in/src/commands/commands.html"/>
             </bt:Urls>
             <bt:ShortStrings>
                 <bt:String id="GroupLabel" DefaultValue="Event-based activation on mobile"/>
