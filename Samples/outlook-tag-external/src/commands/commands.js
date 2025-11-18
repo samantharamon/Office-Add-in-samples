@@ -123,17 +123,18 @@ function checkForExternalBcc() {
     function(asyncResult) {
       // Handle success or error.
       if (asyncResult.status === Office.AsyncResultStatus.Succeeded) {
-      console.log(`sessionData.setAsync(${key}) to ${value} succeeded`);
-      if (value) {
-        _tagExternal(value);
+        console.log(`sessionData.setAsync(${key}) to ${value} succeeded`);
+        if (value) {
+          _tagExternal(value);
+        } else {
+          _checkForExternal();
+        }
       } else {
-        _checkForExternal();
+        console.error(`Failed to set ${key} sessionData to ${value}. Error: ${JSON.stringify(asyncResult.error)}`);
+        return;
       }
-    } else {
-      console.error(`Failed to set ${key} sessionData to ${value}. Error: ${JSON.stringify(asyncResult.error)}`);
-      return;
     }
-  });
+  );
 }
 /**
  * Checks the sessionData property bag to determine if any field contains external recipients.
