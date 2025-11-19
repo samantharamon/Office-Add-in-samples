@@ -3,6 +3,8 @@
  * See LICENSE in the project root for license information.
  */
 
+Office.onReady();
+
 function onMessageRecipientsChangedHandler(event) {
   if (event.changedRecipientFields.to) {
     checkForExternalTo(event);
