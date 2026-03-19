@@ -1,0 +1,177 @@
+{
+    "$schema": "https://developer.microsoft.com/json-schemas/teams/vDevPreview/MicrosoftTeams.schema.json",
+    "manifestVersion": "devPreview",
+    "version": "1.0.0",
+    "id": "69e10c93-3cf3-4d08-a6f0-91ab9815bd51",
+    "localizationInfo": {
+        "defaultLanguageTag": "en-us",
+        "additionalLanguages": []
+    },
+    "developer": {
+        "name": "Contoso",
+        "websiteUrl": "https://www.contoso.com",
+        "privacyUrl": "https://www.contoso.com/privacy",
+        "termsOfUseUrl": "https://www.contoso.com/servicesagreement"
+    },
+    "name": {
+        "short": "JSON keyboard shortcuts sample",
+        "full": "JSON keyboard shortcuts sample"
+    },
+    "description": {
+        "short": "Keyboard shortcuts sample using JSON manifest.",
+        "full": "Keyboard shortcuts sample using JSON manifest."
+    },
+    "icons": {
+        "outline": "assets/outline.png",
+        "color": "assets/color.png"
+    },
+    "accentColor": "#230201",
+    "validDomains": [
+        "contoso.com"
+    ],
+    "authorization": {
+        "permissions": {
+            "resourceSpecific": [
+                {
+                    "name": "Document.ReadWrite.User",
+                    "type": "Delegated"
+                }
+            ]
+        }
+    },
+    "extensions": [
+        {
+            "requirements": {
+                "capabilities": [
+                    {
+                        "name": "KeyboardShortcuts",
+                        "minVersion": "1.1"
+                    }
+                ],
+                "scopes": [
+                    "workbook",
+                    "document",
+                    "presentation"
+                ]
+            },
+            "runtimes": [
+                {
+                    "requirements": {
+                        "capabilities": [
+                            {
+                                "name": "SharedRuntime",
+                                "minVersion": "1.1"
+                            }
+                        ]
+                    },
+                    "id": "TaskPaneRuntime",
+                    "type": "general",
+                    "code": {
+                        "page": "https://localhost:3000/taskpane.html"
+                    },
+                    "lifetime": "long",
+                    "actions": [
+                        {
+                            "id": "TaskPaneRuntimeShow",
+                            "type": "openPage"
+                        },
+                        {
+                            "id": "ShowTaskpane",
+                            "type": "executeFunction",
+                            "displayName": "Show task pane"
+                        },
+                        {
+                            "id": "HideTaskpane",
+                            "type": "executeFunction",
+                            "displayName": "Hide task pane"
+                        }
+                    ]
+                }
+            ],
+            "keyboardShortcuts": [
+                {
+                    "requirements": {
+                        "capabilities": [
+                            {
+                                "name": "SharedRuntime",
+                                "minVersion": "1.1"
+                            }
+                        ]
+                    },
+                    "shortcuts": [
+                        {
+                            "key": {
+                                "default": "Ctrl+Alt+Up"
+                            },
+                            "actionId": "ShowTaskpane"
+                        },
+                        {
+                            "key": {
+                                "default": "Ctrl+Alt+Down"
+                            },
+                            "actionId": "HideTaskpane"
+                        }
+                    ]
+                }
+            ],
+            "ribbons": [
+                {
+                    "contexts": [
+                        "default"
+                    ],
+                    "tabs": [
+                        {
+                            "builtInTabId": "TabHome",
+                            "groups": [
+                                {
+                                    "id": "keyboardShortcutsGroup",
+                                    "label": "v8 JSON keyboard shortcuts",
+                                    "icons": [
+                                        {
+                                            "size": 16,
+                                            "url": "https://localhost:3000/assets/icon-16.png"
+                                        },
+                                        {
+                                            "size": 32,
+                                            "url": "https://localhost:3000/assets/icon-32.png"
+                                        },
+                                        {
+                                            "size": 80,
+                                            "url": "https://localhost:3000/assets/icon-80.png"
+                                        }
+                                    ],
+                                    "controls": [
+                                        {
+                                            "id": "TaskPaneButton",
+                                            "type": "button",
+                                            "label": "Show Taskpane",
+                                            "icons": [
+                                                {
+                                                    "size": 16,
+                                                    "url": "https://localhost:3000/assets/icon-16.png"
+                                                },
+                                                {
+                                                    "size": 32,
+                                                    "url": "https://localhost:3000/assets/icon-32.png"
+                                                },
+                                                {
+                                                    "size": 80,
+                                                    "url": "https://localhost:3000/assets/icon-80.png"
+                                                }
+                                            ],
+                                            "supertip": {
+                                                "title": "Show task pane",
+                                                "description": "Opens the add-in's task pane."
+                                            },
+                                            "actionId": "TaskPaneRuntimeShow"
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}
