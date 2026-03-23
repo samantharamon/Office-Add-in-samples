@@ -16,7 +16,7 @@ Office.onReady((info) => {
   }
 });
 
-export async function runWord() {
+async function runWord() {
   return Word.run(async (context) => {
     /**
      * Insert your Word code here

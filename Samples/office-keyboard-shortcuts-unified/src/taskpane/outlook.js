@@ -16,7 +16,7 @@ Office.onReady((info) => {
   }
 });
 
-export async function runOutlook() {
+async function runOutlook() {
   /**
    * Insert your Outlook code here
    */

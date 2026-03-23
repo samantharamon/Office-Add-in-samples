@@ -16,7 +16,7 @@ Office.onReady((info) => {
   }
 });
 
-export async function runPowerPoint() {
+async function runPowerPoint() {
   /**
    * Insert your PowerPoint code here
    */
