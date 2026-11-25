@@ -149,7 +149,8 @@ Verify prerequisites from a clean checkout of the sample. Avoid undocumented rel
 ### Manifest decision
 
 - Use the unified JSON manifest by default when its current client, platform, and feature support meets the agreed requirements.
-- Use the add-in-only XML manifest when explicitly requested or when a verified requirement cannot be met by the unified manifest and the user approves that choice. Verify specific client, platform, and feature limitations using [Client and platform support](https://learn.microsoft.com/office/dev/add-ins/develop/unified-manifest-overview#client-and-platform-support). If a required capability is unsupported, explain the gap and ask whether to use the add-in-only manifest, maintain both manifest versions following existing samples in the repository, or revise the requirements. Do not silently drop required support or add a second manifest.
+- Use the add-in only manifest when explicitly requested or when a verified requirement cannot be met by the unified manifest and the user approves that choice. Verify specific client, platform, and feature limitations using [Client and platform support](https://learn.microsoft.com/office/dev/add-ins/develop/unified-manifest-overview#client-and-platform-support). If a required capability is unsupported, explain the gap and ask whether to use the add-in only manifest, maintain both manifest versions following existing samples in the repository, or revise the requirements. Do not silently drop required support or add a second manifest.
+- In author-written documentation, call this format the "add-in only manifest", not the "XML manifest" or "add-in-only manifest". Preserve literal filenames, paths, URLs, schema identifiers, and code.
 - Do not assume that support for an API implies support for a particular manifest.
 - Do not change an existing project's manifest format solely to match a starter default.
 

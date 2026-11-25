@@ -26,13 +26,15 @@ Explore sales trends for a product over a selected date range in Excel. This sam
 - Visualizing one selected sales metric in a line, clustered column, or area chart.
 - Updating an existing table and chart and activating the result worksheet.
 
+For the same workbook operations in a React task pane with Fluent UI tabs, see [Track Excel sales with Fluent UI React tabs](../excel-track-sales-react). Both samples use the same worksheet, table, and chart names, so use separate workbooks to compare them independently.
+
 ## Applies to
 
 - Excel on Windows
 - Excel on Mac
 - Excel on the web
 
-The sample requires **ExcelApi 1.9** and uses a unified manifest for Microsoft 365. To check API availability across supported clients, see [Excel JavaScript API requirement sets](https://learn.microsoft.com/javascript/api/requirement-sets/excel/excel-api-requirement-sets). Current manifest support requires Excel for Windows version 2501 or later, or Excel for Mac version 16.103 or later. To check manifest compatibility across clients, see [unified manifest platform support](https://learn.microsoft.com/office/dev/add-ins/develop/unified-manifest-overview#client-and-platform-support).
+The sample requires **ExcelApi 1.13**, including support for resizing an existing table, and uses a unified manifest for Microsoft 365. To check API availability across supported clients, see [Excel JavaScript API requirement sets](https://learn.microsoft.com/javascript/api/requirement-sets/excel/excel-api-requirement-sets). Current manifest support requires Excel for Windows version 2501 or later, or Excel for Mac version 16.103 or later. To check manifest compatibility across clients, see [unified manifest platform support](https://learn.microsoft.com/office/dev/add-ins/develop/unified-manifest-overview#client-and-platform-support).
 
 ## Prerequisites
 

@@ -164,9 +164,9 @@ Office.onReady((info) => {
     status.textContent = "Open this add-in in Excel to track sales.";
     return;
   }
-  if (!Office.context.requirements.isSetSupported("ExcelApi", "1.9")) {
+  if (!Office.context.requirements.isSetSupported("ExcelApi", "1.13")) {
     status.textContent =
-      "This sample requires ExcelApi 1.9 or later. Update Excel before continuing.";
+      "This sample requires ExcelApi 1.13 or later. Update Excel before continuing.";
     return;
   }
   document.getElementById("app-body").hidden = false;
